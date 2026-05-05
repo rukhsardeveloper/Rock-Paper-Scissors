@@ -4,6 +4,9 @@ let userscore=0
 let computerscore=0
 
 const Choices=  document.getElementsByClassName('choice')
+const msgcontainer=document.getElementById('msg')
+const userScorepara=document.getElementById('user-Score')
+const computerScorepara=document.getElementById('computer-Score')
 // console.log(choices)
 
 for(let choice of Choices){
@@ -15,9 +18,9 @@ for(let choice of Choices){
     })
 }
 function playgame(userChoice){
-    console.log(`user clicked: ${userChoice}`)
+    // console.log(`user clicked: ${userChoice}`)
     const ComputerChoice=gencompchoice()//rock,paper,scissor
-    console.log(`Computer Chose:${ComputerChoice}`)
+    // console.log(`Computer Chose:${ComputerChoice}`)
     if(userChoice==ComputerChoice){
         draw()
     }else{
@@ -32,7 +35,7 @@ function playgame(userChoice){
     }else{
         userwin=ComputerChoice =="paper"? true:false
     }
-    showWinner(userwin)
+    showWinner(userwin,ComputerChoice,userChoice)
 }}
 
 function gencompchoice(){
@@ -42,11 +45,21 @@ function gencompchoice(){
 }
 function draw(){
     console.log("draw")
+    msgcontainer.innerText= "draw,play again!"
+    msgcontainer.style.backgroundColor='rgb(5,5,36)'
 }
-function showWinner(userwin){
+function showWinner(userwin,ComputerChoice,userChoice){
     if(userwin==true){
-        console.log("you win")
+        userscore++
+        userScorepara.innerText=userscore
+        // console.log(`you win:Computer Chose:${ComputerChoice} |User Choice:${userChoice}`)
+        msgcontainer.innerText=`you win:Computer Chose:${ComputerChoice} |User Choice:${userChoice}`
+        msgcontainer.style.backgroundColor='green'
     }else{
-       console.log("you lose") 
+        computerscore++
+        computerScorepara.innerText=computerscore
+    //    console.log(`you lose:Computer Chose:${ComputerChoice} |User Choice:${userChoice}`)
+       msgcontainer.innerText=`you lose:Computer Chose:${ComputerChoice} |User Choice:${userChoice}`
+       msgcontainer.style.backgroundColor='red'
     }
 }
